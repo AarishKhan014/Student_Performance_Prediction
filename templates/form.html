@@ -1,0 +1,50 @@
+<html>
+<body>
+
+<form action="{{url_for('predict_datapoint')}}" method="POST">
+    <div class="form-group">
+        <label for="Hours_Studied">Hours_Studied:</label>
+        <input type="text" id="Hours_Studied" name="Hours_Studied" placeholder="Enter Hours_Studied value (float)">
+    </div>
+
+    <div class="form-group">
+        <label for="Previous_Scores">Previous_Scores:</label>
+        <input type="text" id="Previous_Scores" name="Previous_Scores" placeholder="Enter Previous_Scores value (float)">
+    </div>
+
+    <!-- <div class="form-group">
+        <label for="Extracurricular_Activities">Extracurricular_Activities:</label>
+        <input type="text" id="Extracurricular_Activities" name="Extracurricular_Activities" placeholder="Enter Extracurricular_Activities value (float)">
+    </div> -->
+    <div class="form-group">
+        <label for="Extracurricular_Activities">Extracurricular_Activities:</label>
+        <select id="Extracurricular_Activities" name="Extracurricular_Activities">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Sleep_Hours">Sleep_Hours:</label>
+        <input type="number" id="Sleep_Hours" name="Sleep_Hours" placeholder="Enter Sleep_Hours value (float)">
+    </div>
+
+
+    <div class="form-group">
+        <label for="Sample_Question_Papers_Practiced">Sample_Question_Papers_Practiced:</label>
+        <input type="number" id="Sample_Question_Papers_Practiced" name="Sample_Question_Papers_Practiced" placeholder="Enter Sample_Question_Papers_Practiced value (float)">
+    </div>
+
+
+
+
+<div style="clear:both;"></div>
+    <input type="submit" value="Submit">
+
+
+
+</form>
+
+<p>The Expected Performance You'll Achieve Is: <b>{{ final_result }}</b></p>
+</body>
+</html>
