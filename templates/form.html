@@ -1,50 +1,146 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Performance Prediction</title>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #e8ecf3;
+            margin: 0;
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 35px 40px;
+            border-radius: 12px;
+            width: 450px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 26px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            background: #fafafa;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #0077ff;
+            background: #fff;
+            box-shadow: 0 0 5px rgba(0, 119, 255, 0.3);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            background: #0077ff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #005fcc;
+            transform: scale(1.02);
+        }
+
+        .result-box {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 18px;
+            color: #222;
+            font-weight: 500;
+        }
+
+        .result-box b {
+            color: #0077ff;
+        }
+    </style>
+</head>
 <body>
 
-<form action="{{url_for('predict_datapoint')}}" method="POST">
-    <div class="form-group">
-        <label for="Hours_Studied">Hours_Studied:</label>
-        <input type="text" id="Hours_Studied" name="Hours_Studied" placeholder="Enter Hours_Studied value (float)">
+<div class="container">
+    <h1>Student Performance Prediction</h1>
+
+    <form action="{{ url_for('predict_datapoint') }}" method="POST">
+
+        <div class="form-group">
+            <label for="Hours_Studied">Hours Studied</label>
+            <input type="number" id="Hours_Studied" name="Hours_Studied" placeholder="Enter study hours">
+        </div>
+
+        <div class="form-group">
+            <label for="Previous_Scores">Previous Scores</label>
+            <input type="number" id="Previous_Scores" name="Previous_Scores" placeholder="Enter previous score">
+        </div>
+
+        <div class="form-group">
+            <label for="Extracurricular_Activities">Extracurricular Activities</label>
+            <select id="Extracurricular_Activities" name="Extracurricular_Activities">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Sleep_Hours">Sleep Hours</label>
+            <input type="number" id="Sleep_Hours" name="Sleep_Hours" placeholder="Enter sleep hours">
+        </div>
+
+        <div class="form-group">
+            <label for="Sample_Question_Papers_Practiced">Sample Papers Practiced</label>
+            <input type="number" id="Sample_Question_Papers_Practiced" name="Sample_Question_Papers_Practiced" placeholder="Enter number of papers practiced">
+        </div>
+
+        <button class="btn" type="submit">Predict Performance</button>
+    </form>
+
+    {% if final_result %}
+    <div class="result-box">
+        Expected Performance: <b>{{ final_result }}</b>
     </div>
+    {% endif %}
+</div>
 
-    <div class="form-group">
-        <label for="Previous_Scores">Previous_Scores:</label>
-        <input type="text" id="Previous_Scores" name="Previous_Scores" placeholder="Enter Previous_Scores value (float)">
-    </div>
-
-    <!-- <div class="form-group">
-        <label for="Extracurricular_Activities">Extracurricular_Activities:</label>
-        <input type="text" id="Extracurricular_Activities" name="Extracurricular_Activities" placeholder="Enter Extracurricular_Activities value (float)">
-    </div> -->
-    <div class="form-group">
-        <label for="Extracurricular_Activities">Extracurricular_Activities:</label>
-        <select id="Extracurricular_Activities" name="Extracurricular_Activities">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label for="Sleep_Hours">Sleep_Hours:</label>
-        <input type="number" id="Sleep_Hours" name="Sleep_Hours" placeholder="Enter Sleep_Hours value (float)">
-    </div>
-
-
-    <div class="form-group">
-        <label for="Sample_Question_Papers_Practiced">Sample_Question_Papers_Practiced:</label>
-        <input type="number" id="Sample_Question_Papers_Practiced" name="Sample_Question_Papers_Practiced" placeholder="Enter Sample_Question_Papers_Practiced value (float)">
-    </div>
-
-
-
-
-<div style="clear:both;"></div>
-    <input type="submit" value="Submit">
-
-
-
-</form>
-
-<p>The Expected Performance You'll Achieve Is: <b>{{ final_result }}</b></p>
 </body>
 </html>

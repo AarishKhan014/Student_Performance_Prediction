@@ -15,17 +15,18 @@ def predict_datapoint():
     else:
         data = StoringData(
             hours_studied= float(request.form.get('Hours_Studied')),
-            previous_score= float(request.form.get('Previous_Scores')),
-            ec_activity= request.form.get('Extracurricular_Activities'),
+            previous_scores= float(request.form.get('Previous_Scores')),
+            extracurricular_activities= request.form.get('Extracurricular_Activities'),
             sleep_hours= float(request.form.get('Sleep_Hours')),
-            question_paper_practiced= float(request.form.get('Sample_Question_Papers_Practiced')),
+            sample_question_papers_practiced= float(request.form.get('Sample_Question_Papers_Practiced')),
         )
     
 
         final_df = data.get_data_as_dataframe()
 
         predict_pipeline = PredictPipeline()
-        results = predict_pipeline.predict(final_df)
+        results = predict_pipeline.prediction(final_df)
+        results = round(results[0], 2)
 
         return render_template('form.html', final_result=results)
 

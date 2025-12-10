@@ -15,7 +15,7 @@ class PredictPipeline:
 
 
     
-    def predict(self, features):
+    def prediction(self, features):
         try:
             scaler_path = os.path.join('artifacts', 'preprocessor.pkl')
             model_path = os.path.join('artifacts', 'model.pkl')
@@ -35,7 +35,7 @@ class PredictPipeline:
     
 
 class StoringData:
-    def __inti__ (self,
+    def __init__ (self,
                   hours_studied,
                   previous_scores,
                   extracurricular_activities,
@@ -59,6 +59,10 @@ class StoringData:
                 'Sleep Hours':self.sleep_hours,
                 'Sample Question Papers Practiced':self.sample_question_papers_practiced
             }
+
+            if custom_data_input_dict['Extracurricular Activities'] == 'Yes':
+                custom_data_input_dict['Extracurricular Activities'] = 1
+
 
             df = pd.DataFrame(custom_data_input_dict, index=[0])
             logging.info('Data Collected And DataFrame Created.')
