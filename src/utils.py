@@ -24,17 +24,6 @@ def remove_correlated_features(df_corr, thresh):
 
 
 
-def save_object (file_path, obj):
-    try:
-        with open(file_path, 'wb') as file_obj:
-            pickle.dump(obj, file_obj)
-            
-    except Exception as e:
-        logging.info('Exception Occured in Saving Object.')
-        raise CustomException (e, sys)
-    
-
-
 def evaluate_model(X_train, y_train, X_test, y_test, models):
     try:
         report = {}
@@ -55,3 +44,27 @@ def evaluate_model(X_train, y_train, X_test, y_test, models):
     except Exception as e:
         logging.info('Exception Occured in Model Evaluation')
         raise CustomException(e, sys)
+
+
+def save_object (file_path, obj):
+    try:
+        with open(file_path, 'wb') as file_obj:
+            pickle.dump(obj, file_obj)
+            
+    except Exception as e:
+        logging.info('Exception Occured in Saving Object.')
+        raise CustomException (e, sys)
+
+
+
+def load_object (file_path):
+    try:
+        with open(file_path, 'rb') as file_obj:
+            data = pickle.load(file_obj)
+
+        return data
+            
+    except Exception as e:
+        logging.info('Exception Occured in Loading Object.')
+        raise CustomException (e, sys)
+    
