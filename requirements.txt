@@ -1,0 +1,6 @@
+setuptools
+scikit-learn
+numpy
+pandas 
+Flask
+-e .
